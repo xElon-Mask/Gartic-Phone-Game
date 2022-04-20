@@ -11,5 +11,9 @@ contract GarticPhone is Ownable {
     mapping (address => bool) played;
     address winner;
 
-    
+    // state of the game
+    enum State {proposition, devine, fin}
+    State state = State.proposition;
+
+
 }
