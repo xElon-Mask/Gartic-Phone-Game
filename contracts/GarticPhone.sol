@@ -22,9 +22,9 @@ contract GarticPhone is Ownable {
     // Add new word to the list
     function StoreWord(string memory _newWord) public {
         require(state == State.proposition, "You can't play to the game");
-        require(keccak256(abi.encodePacked(_newWord)) != keccak256(abi.encodePacked(GetLastWord()), "Can't write same word ! "));
+        require(keccak256(abi.encodePacked((_newWord))) != keccak256(abi.encodePacked(GetLastWord())), "Can't write same word ! ");
         require(!played[msg.sender], "You have already played !");
-        words.push[_newWord];
+        words.push(_newWord);
         emit newWord(msg.sender, _newWord);
         if (words.length == 20) {
             state = State.devine;
@@ -33,4 +33,11 @@ contract GarticPhone is Ownable {
     }
 
     // Get only the last word : GetLastWord()
+    function GetLastWord() public view returns (string memory) {
+        if (words.length != 0) {
+            return words[words.length - 1];
+        } else {
+            return " ";
+        }
+    }
 }
