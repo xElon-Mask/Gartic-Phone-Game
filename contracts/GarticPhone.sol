@@ -45,4 +45,12 @@ contract GarticPhone is Ownable {
     function GetWords() public view onlyOwner returns (string[] memory) {
         return words;
     }
+
+    // Get the first word and the last word at the end of the game
+    function getFirstLast() public view onlyOwner returns (string memory first, string memory last) {
+        require(state == State.devine, "The Game is not finished");
+        state == State.fin;
+        emit stateChanged(state);
+        return (words[0], words[19]);
+    }
 }
