@@ -81,4 +81,22 @@ contract GarticPhone is Ownable {
         emit finalResults(words[0], words[19], winner);
     }
 
+    // Reset the game : Clear words array, clear winner address, clear the played mapping
+    function resetGame() public onlyOwner{
+        require(state == State.fin, "Game not already finished");
+        state = State.proposition;
+        emit stateChanged(state);
+        for (uint i = 19; i >= 0; i--) {
+            words.pop;
+        }
+        winner = address(0);
+        noPlayers();
+    }
+
+    function noPlayers() private {
+        for (uint i = 19; i >= 0; i--) {
+            played[players[i]] == false;
+            players.pop;
+        }
+    }
 }
