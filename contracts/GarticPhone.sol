@@ -87,7 +87,7 @@ contract GarticPhone is Ownable {
         state = State.proposition;
         emit stateChanged(state);
         for (uint i = 19; i >= 0; i--) {
-            words.pop;
+            words.pop();
         }
         winner = address(0);
         noPlayers();
@@ -96,7 +96,7 @@ contract GarticPhone is Ownable {
     function noPlayers() private {
         for (uint i = 19; i >= 0; i--) {
             played[players[i]] == false;
-            players.pop;
+            players.pop();
         }
     }
 }
