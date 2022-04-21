@@ -40,4 +40,9 @@ contract GarticPhone is Ownable {
             return " ";
         }
     }
+
+    // Get the words list
+    function GetWords() public view onlyOwner returns (string[] memory) {
+        return words;
+    }
 }
