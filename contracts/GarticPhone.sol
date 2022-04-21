@@ -18,6 +18,7 @@ contract GarticPhone is Ownable {
     // events
     event newWord(address player, string word);
     event stateChanged(State enCours);
+    event finalResults(string firstWord, string lastWord, address winnerAddress);
 
     // Add new word to the list
     function StoreWord(string memory _newWord) public {
@@ -65,6 +66,12 @@ contract GarticPhone is Ownable {
             emit stateChanged(state);
             return winner;
         }
+    }
+
+    // Getter of the end of the game
+    function getResults() public view {
+        require(state == State.fin, "Game not already finished");
+        emit finalResults(words[0], words[19], winner);
     }
 
 }
