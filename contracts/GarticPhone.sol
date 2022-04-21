@@ -53,4 +53,18 @@ contract GarticPhone is Ownable {
         emit stateChanged(state);
         return (words[0], words[19]);
     }
+
+    // Guessing
+    function guessIt(string memory _word) public returns (address) {
+        require(state == State.devine, "You can't guess the word yet");
+        if (keccak256(abi.encodePacked(_word)) != keccak256(abi.encodePacked(words[0]))) {
+            return (address(0));
+        } else {
+            winner = msg.sender;
+            state = State.fin;
+            emit stateChanged(state);
+            return winner;
+        }
+    }
+
 }
