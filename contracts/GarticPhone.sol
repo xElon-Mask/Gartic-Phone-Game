@@ -9,6 +9,7 @@ contract GarticPhone is Ownable {
     // variables: array of words, players and winner if any
     string[] private words;
     mapping (address => bool) played;
+    address[] players;
     address winner;
 
     // state of the game
@@ -26,11 +27,17 @@ contract GarticPhone is Ownable {
         require(keccak256(abi.encodePacked((_newWord))) != keccak256(abi.encodePacked(GetLastWord())), "Can't write same word ! ");
         require(!played[msg.sender], "You have already played !");
         words.push(_newWord);
+        newPlayer(msg.sender);
         emit newWord(msg.sender, _newWord);
         if (words.length == 20) {
             state = State.devine;
             emit stateChanged(state);
         }
+    }
+
+    // Keep all the adresses of the players (20)
+    function newPlayer(address _newPlayer) private {
+        players.push(_newPlayer);
     }
 
     // Get only the last word : GetLastWord()
